@@ -1,6 +1,6 @@
 FROM node:10.8.0-alpine
 
-ENV SERVICE_USER=watsonwork-echo
+ENV SERVICE_USER=watsonwork
 ENV APP_DIR=/home/$SERVICE_USER/app/
 
 ADD . $APP_DIR
