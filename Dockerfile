@@ -1,6 +1,6 @@
-FROM node:10.8.0-alpine
+FROM node:10.9.0-alpine
 
-ENV SERVICE_USER=watsonwork
+ENV SERVICE_USER=example
 ENV APP_DIR=/home/$SERVICE_USER/app/
 
 ADD . $APP_DIR
@@ -15,4 +15,4 @@ USER $SERVICE_USER
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start-prod"]
+CMD ["npm", "run", "start"]

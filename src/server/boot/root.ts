@@ -2,8 +2,11 @@ import bparser from 'body-parser';
 import { createHmac } from 'crypto';
 import { NextFunction, Request, Response, Router } from 'express';
 import webhook from '../controllers/webhook';
+import workspace from '../services/workspace';
 import logger from '../utils/logger';
-import { authorize } from '../services/workspace';
+
+const appId = process.env.APP_ID || '';
+const webhookSecret = process.env.WEBHOOK_SECRET || '';
 
 /**
  * Verify request signature
@@ -51,12 +54,8 @@ const challenge = (secret: string) => (req: Request, res: Response, next: NextFu
 };
 
 const root = async app => {
-  const appId = process.env.APP_ID || '';
-  const appSecret = process.env.APP_SECRET || '';
-  const webhookSecret = process.env.WEBHOOK_SECRET || '';
-
   try {
-    await authorize(appId, appSecret);
+    await workspace.authorize();
   } catch (err) {
     logger.fatal(err);
     process.exit(1);
