@@ -1,27 +1,37 @@
-import workspace, { Annotation } from '../services/workspace';
+import { Request, Response } from 'express';
+import workspace from '../services/workspace';
 import logger from '../utils/logger';
+
+const appId = process.env.APP_ID || '';
 
 /**
  * Handle a message-created event
  *
- * @param ann
+ * @param body
  */
-const onMessageCreagted = (ann: Annotation) => {
+const onMessageCreagted = (body: any) => {
   // Just send back the same message
-  workspace.postMessage(ann.spaceId, ann.content);
+  workspace.sendMessage(body.spaceId, body.content);
 };
 
 /**
  * Handle events sent from Watson Workspace
  *
- * @param ann
+ * @param req
+ * @param res
  */
-const webhook = async (ann: Annotation) => {
-  logger.trace(ann);
+const webhook = async (req: Request, res: Response) => {
+  res.status(201).end();
 
-  switch (ann.type) {
+  if (req.body.userId === appId) {
+    return;
+  }
+  logger.trace(req.body);
+
+  switch (req.body.type) {
     case 'message-created':
-      onMessageCreagted(ann);
+      onMessageCreagted(req.body);
+      break;
   }
 };
 

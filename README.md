@@ -15,7 +15,7 @@ ngrok http 3000
 #### Add outbound webhook
 1. Navigate to **Listen to Events** and click **Add an outbound webhook**
 1. Give your webhook name and set your callback URL. The URL should be `<NGROK_HOST>/webhook`.
-1. Check **message-created** and **_message-annotation-added** events and click **Save**
+1. Check **message-created** events and click **Save**
 1. Note the give Webhook Secret
 
 
@@ -23,9 +23,9 @@ ngrok http 3000
 #### (Optoin 1). Run app from console
 1.  Set the following environment variables
 ```
-export WORKSPACE_APP_ID=<Your App ID>
-export WORKSPACE_APP_SECRET=<Your App Secret>
-export WORKSPACE_WEBHOOK_SECRET=<Your Webhook Secret>
+export APP_ID=<Your App ID>
+export APP_SECRET=<Your App Secret>
+export WEBHOOK_SECRET=<Your Webhook Secret>
 ```
 
 2.  Build
@@ -48,9 +48,9 @@ docker build -f Dockerfile -t watsonwork-loopback-example:latest .
 2.  Run
 ```
 docker run -it -p 3000:3000 \
--e WORKSPACE_APP_ID=<Your App ID> \
--e WORKSPACE_APP_SECRET=<Your App Secret> \
--e WORKSPACE_WEBHOOK_SECRET=<Your Webhook Secret> \
+-e APP_ID=<Your App ID> \
+-e APP_SECRET=<Your App Secret> \
+-e WEBHOOK_SECRET=<Your Webhook Secret> \
 watsonwork-loopback-example:latest
 ```
 
@@ -59,9 +59,9 @@ watsonwork-loopback-example:latest
 2. Set the following envitonment variables in [.vscode/launch.json](https://github.com/nhayashida/watsonwork-loopback-example/blob/master/.vscode/launch.json)
 ```
 "env": {
-  "WORKSPACE_APP_ID": "<Your App ID>",
-  "WORKSPACE_APP_SECRET": "<Your App Secret>",
-  "WORKSPACE_WEBHOOK_SECRET": "<Your Webhook Secret>",
+  "APP_ID": "<Your App ID>",
+  "APP_SECRET": "<Your App Secret>",
+  "WEBHOOK_SECRET": "<Your Webhook Secret>",
 },
 ```
 3. Select **Debug** -> **Start Debugging**

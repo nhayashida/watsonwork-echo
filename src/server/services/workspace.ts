@@ -5,14 +5,6 @@ import logger from '../utils/logger';
 const appId = process.env.APP_ID || '';
 const appSecret = process.env.APP_SECRET || '';
 
-export interface Annotation {
-  spaceId: string;
-  userId: string;
-  messageId: string;
-  type: string;
-  content: string;
-}
-
 interface AuthToken {
   token: string;
   expiresAt: number;
@@ -67,12 +59,19 @@ class Workspace {
     return this.authToken.token;
   }
 
-  async postMessage(spaceId: string, text: string) {
+  /**
+   * Send message to a space
+   * https://developer.watsonwork.ibm.com/docs/message/send-a-message-into-a-conversation
+   *
+   * @param spaceId
+   * @param text
+   */
+  async sendMessage(spaceId: string, text: string) {
     const options = {
       method: 'POST',
       uri: `https://api.watsonwork.ibm.com/v1/spaces/${spaceId}/messages`,
       headers: {
-        Authorization: `Bearer ${this.getAccessToken()}`,
+        Authorization: `Bearer ${await this.getAccessToken()}`,
       },
       body: {
         type: 'appMessage',
@@ -89,7 +88,8 @@ class Workspace {
     };
 
     try {
-      await rp(options);
+      const res = await rp(options);
+      logger.debug(res);
     } catch (err) {
       logger.error(err);
     }

@@ -5,7 +5,6 @@ import webhook from '../controllers/webhook';
 import workspace from '../services/workspace';
 import logger from '../utils/logger';
 
-const appId = process.env.APP_ID || '';
 const webhookSecret = process.env.WEBHOOK_SECRET || '';
 
 /**
@@ -71,13 +70,7 @@ const root = async app => {
       verify: verify(webhookSecret),
     }),
     challenge(webhookSecret),
-    async (req, res) => {
-      res.status(201).end();
-
-      if (req.body.userId !== appId) {
-        webhook(req.body);
-      }
-    },
+    webhook,
   );
   app.use(router);
 };
