@@ -42,7 +42,7 @@ npm run build
 
 1.  Build a Docker image
 ```
-docker build -f Dockerfile -t watsonwork-loopback-example:latest .
+docker build -f Dockerfile -t watsonwork-loopback-sample:latest .
 ```
 
 2.  Run
@@ -51,12 +51,12 @@ docker run -it -p 3000:3000 \
 -e APP_ID=<Your App ID> \
 -e APP_SECRET=<Your App Secret> \
 -e WEBHOOK_SECRET=<Your Webhook Secret> \
-watsonwork-loopback-example:latest
+watsonwork-loopback-sample:latest
 ```
 
 #### (Option 3). Run app from Visual Studio Code
 1. Open your local repository with Visual Studio Code
-2. Set the following envitonment variables in [.vscode/launch.json](https://github.com/nhayashida/watsonwork-loopback-example/blob/master/.vscode/launch.json)
+2. Set the following envitonment variables in [.vscode/launch.json](.vscode/launch.json)
 ```
 "env": {
   "APP_ID": "<Your App ID>",
