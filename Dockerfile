@@ -1,17 +1,14 @@
-FROM node:10.9.0-alpine
+FROM node:10.14.1-alpine
 
-ENV SERVICE_USER=example
+ENV SERVICE_USER=watsonwork
 ENV APP_DIR=/home/$SERVICE_USER/app/
 
 ADD . $APP_DIR
 RUN adduser -D -g '' $SERVICE_USER
 RUN chown -R $SERVICE_USER.$SERVICE_USER $APP_DIR
+USER $SERVICE_USER
 
 WORKDIR $APP_DIR
-RUN npm install
-RUN npm run build
-
-USER $SERVICE_USER
 
 EXPOSE 3000
 

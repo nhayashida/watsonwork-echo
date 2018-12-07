@@ -6,16 +6,13 @@
       "request": "launch",
       "name": "npm start",
       "program": "${workspaceFolder}/src/server/server.ts",
+      "runtimeArgs": [
+        "-r", "dotenv/config",
+        "-r", "ts-node/register"
+      ],
       "outFiles": ["${workspaceFolder}/**/*.js"],
       "preLaunchTask": "build",
       "console": "integratedTerminal",
-      "env": {
-        "APP_ID": "",
-        "APP_SECRET": "",
-        "WEBHOOK_SECRET": "",
-        "LOGGER_LEVEL": "debug",
-        "LOGGER_PRETTY": "true"
-      }
     }
   ]
 }

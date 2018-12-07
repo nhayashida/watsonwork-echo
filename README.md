@@ -21,12 +21,7 @@ ngrok http 3000
 
 ## Start node server
 #### (Optoin 1). Run app from console
-1.  Set the following environment variables
-```
-export APP_ID=<Your App ID>
-export APP_SECRET=<Your App Secret>
-export WEBHOOK_SECRET=<Your Webhook Secret>
-```
+1. Edit the environment variables in [.env](.env)
 
 2.  Build
 ```
@@ -35,36 +30,29 @@ npm run build
 ```
 
 3.  Run
-
-> npm run start-prod
+```
+npm run start
+```
 
 #### (Optoin 2). Run app using Docker
+1. Edit the environment variables in [.env](.env)
 
-1.  Build a Docker image
+2.  Build a Docker image
 ```
-docker build -f Dockerfile -t watsonwork-loopback-sample:latest .
+npm install
+npm run build
+docker build -f Dockerfile -t watsonwork-loopback-template:latest .
 ```
 
-2.  Run
+3.  Run
 ```
-docker run -it -p 3000:3000 \
--e APP_ID=<Your App ID> \
--e APP_SECRET=<Your App Secret> \
--e WEBHOOK_SECRET=<Your Webhook Secret> \
-watsonwork-loopback-sample:latest
+docker run -it -p 3000:3000 watsonwork-loopback-template:latest
 ```
 
 #### (Option 3). Run app from Visual Studio Code
 1. Open your local repository with Visual Studio Code
-2. Set the following envitonment variables in [.vscode/launch.json](.vscode/launch.json)
-```
-"env": {
-  "APP_ID": "<Your App ID>",
-  "APP_SECRET": "<Your App Secret>",
-  "WEBHOOK_SECRET": "<Your Webhook Secret>",
-},
-```
-3. Select **Debug** -> **Start Debugging**
+1.  Edit the environment variables in [.env](.env)
+1. Select **Debug** -> **Start Debugging**
 
 ## Enable outbound webhook
 1. Open https://developer.watsonwork.ibm.com/apps
